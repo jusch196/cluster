@@ -4,8 +4,6 @@ echo "Enter your accountname:";
 read accname;
 
 echo 'Host sollipulli
-    HostName 134.99.112.82
-    Port 55517
     IdentityFile ~/.ssh/'$accname'_cluster
     User '$accname'
 Host node49
