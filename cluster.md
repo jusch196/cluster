@@ -7,7 +7,7 @@ _node49_-_node72_ verfügen jeweils über 240 Gigabyte schnellen SSD-Speicher, s
 
 Bei _node49_-_node64_ kommt als Prozessor ein _Xeon E3-1220_  zum Einsatz, bei _node65_-_node80_ jeweils ein etwas leistungsfähigerer _Xeon E5-1650_ mit 64 Gigabyte Arbeitsspeicher. Beide CPUs basieren auf Intels _Sandy Bridge_ Architektur.  
 
-_node49_-_node56_ verfügen über 16 Gigabyte Arbeitsspeicher, _node57_-_node64_ über 32 Gigabyte, und bei _node65_-_node80_ sind es 64 Gigabyte.
+_node49_-_node56_ verfügen über 16 Gigabyte Arbeitsspeicher, _node57_-_node64_ über 32 Gigabyte, sowie _node65_-_node80_ sind es jeweils 64 Gigabyte.
 
 Alle 32 Rechner sind per Gigabit-Ethernet miteinander verbunden.  
 _node49_-_node56_ verfügen zusätzlich noch über 40 Gigabit Infiniband, _node65_-_node80_ sogar über 56 Gigabit Infniband.
@@ -48,6 +48,14 @@ Um nun mit den Knoten zu arbeiten gibt es den Befehl _node_. Zunächst sollte ma
 > node70 up: username (active)  
 > node71 up: username (active)  
 > node72 up: username (active)
+> node73 up: username (active)
+> node74 up: username (active)
+> node75 up: username (active)
+> node76 up: username (active)
+> node77 up: username (active)
+> node78 up: username (active)
+> node79 up: username (active)
+> node80 up: username (active)
 
 In diesem Beispiel sind alle Knoten bis auf _node50_,  _node53_ und _node62_ belegt.  
 Um sich nun einen Knoten zu reservieren, benutzt man _node alloc_:
@@ -140,15 +148,10 @@ Von nun an kann man sich von seinem lokalen Rechner aus direkt auf einem reservi
 ### Bekannte Problemstellung
 Gelegentlich kommt es vor, dass bei der Kompilierung mittels des _build.sh_ Skripts eine Fehlermeldung der Form
 
-> Could not resolve all artifacts for configuration ':classpath'.
-> ...
+> Could not resolve all artifacts for configuration ':classpath'.  
+> ...  
 > org.apache.http.ssl.SSLInitializationException: /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/cacerts (Permission denied)
 
-auftritt. Hierbei schafft das Entfernen der Pakete _openjdk-8-jdk_ und _java-common_ mit dem Befehl
-
-> sudo -P apt purge openjdk-8-jdk java-common
-
-und die anschließende Neuinstallation mittels
-
->sudo -P apt install openjdk-8-jdk
- Abhilfe.
+auftritt. Hierbei schafft das Entfernen der Pakete _openjdk-8-jdk_ und _java-common_ mit dem Befehl und die anschließende Neuinstallation Abhilfe:
+> sudo -P apt purge openjdk-8-jdk java-common  
+> sudo -P apt install openjdk-8-jdk
