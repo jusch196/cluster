@@ -2,15 +2,15 @@
 Dieses Dokument soll dabei helfen sich auf dem Cluster des Lehrstuhls für Betriebssysteme zurechtzufinden
 
 ### Aufbau
-Der Cluster besteht aus 24 Knoten (_node49_-_node72_) und dem zusätzlichen Login-Knoten _sollipulli_.  
-Alle Knoten verfügen jeweils über 240 Gigabyte schnellen SSD-Speicher, sowie 1 Terabyte HDD-Speicher.
+Der Cluster besteht aus 32 Knoten (_node49_-_node80_) und dem zusätzlichen Login-Knoten _sollipulli_.  
+_node49_-_node72_ verfügen jeweils über 240 Gigabyte schnellen SSD-Speicher, sowie 1 Terabyte HDD-Speicher, ab _node73_ stehen 480 Gigabyte und 1 Terabyte HDD-Speicher bereit.
 
-Bei _node49_-_node64_ kommt als Prozessor ein _Xeon E3-1220_  zum Einsatz, bei _node65_-_node72_ jeweils ein etwas leistungsfähigerer _Xeon E5-1650_ mit 64 Gigabyte Arbeitsspeicher. Beide CPUs basieren auf Intels _Sandy Bridge_ Architektur.  
+Bei _node49_-_node64_ kommt als Prozessor ein _Xeon E3-1220_  zum Einsatz, bei _node65_-_node80_ jeweils ein etwas leistungsfähigerer _Xeon E5-1650_ mit 64 Gigabyte Arbeitsspeicher. Beide CPUs basieren auf Intels _Sandy Bridge_ Architektur.  
 
-_node49_-_node56_ verfügen über 16 Gigabyte Arbeitsspeicher, _node57_-_node64_ über 32 Gigabyte, und bei _node65_-_node72_ sind es 64 Gigabyte.
+_node49_-_node56_ verfügen über 16 Gigabyte Arbeitsspeicher, _node57_-_node64_ über 32 Gigabyte, und bei _node65_-_node80_ sind es 64 Gigabyte.
 
-Alle 24 Rechner sind per Gigabit-Ethernet miteinander verbunden.  
-_node49_-_node56_ verfügen zusätzlich noch über 40 Gigabit Infiniband, _node65_-_node72_ sogar über 56 Gigabit Infniband.
+Alle 32 Rechner sind per Gigabit-Ethernet miteinander verbunden.  
+_node49_-_node56_ verfügen zusätzlich noch über 40 Gigabit Infiniband, _node65_-_node80_ sogar über 56 Gigabit Infniband.
 
 ### Container
 Statt direkt auf den Knoten zu arbeiten, hat jeder Nutzer einen eigenen Container, der auf den Knoten gestartet wird. Hierfür wird _systemd-nspawn_ verwendet.  
@@ -136,3 +136,19 @@ Damit man nicht jedes Mal, wenn man sich auf einem Knoten einloggt, sein Passwor
 Hierzu führt man zunächst das Skript [sshkeypairing.sh](https://github.com/hhu-bsinfo/cluster/blob/master/sshkeypairing.sh) auf seinem lokalen Rechner aus. Anschließend muss noch das Skript [sshkeypairingnode.sh](https://github.com/hhu-bsinfo/cluster/blob/master/sshkeypairingnode.sh)
 auf einem der Knoten ausgeführt werden.  
 Von nun an kann man sich von seinem lokalen Rechner aus direkt auf einem reservierten Knoten einloggen.
+
+### Bekannte Problemstellung
+Gelegentlich kommt es vor, dass bei der Kompilierung mittels des _build.sh_ Skripts eine Fehlermeldung der Form
+
+> Could not resolve all artifacts for configuration ':classpath'.
+> ...
+> org.apache.http.ssl.SSLInitializationException: /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/cacerts (Permission denied)
+
+auftritt. Hierbei schafft das Entfernen der Pakete _openjdk-8-jdk_ und _java-common_ mit dem Befehl
+
+> sudo -P apt purge openjdk-8-jdk java-common
+
+und die anschließende Neuinstallation mittels
+
+>sudo -P apt install openjdk-8-jdk
+ Abhilfe.

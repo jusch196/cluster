@@ -77,6 +77,30 @@ Host node71
     User '$accname'
 Host node72
     ProxyCommand ssh -q sollipulli nc -q0 10.0.0.72 22
+    User '$accname'
+Host node73
+    ProxyCommand ssh -q sollipulli nc -q0 10.0.0.73 22
+    User '$accname'
+Host node74
+    ProxyCommand ssh -q sollipulli nc -q0 10.0.0.74 22
+    User '$accname'
+Host node75
+    ProxyCommand ssh -q sollipulli nc -q0 10.0.0.75 22
+    User '$accname'
+Host node76
+    ProxyCommand ssh -q sollipulli nc -q0 10.0.0.76 22
+    User '$accname'
+Host node77
+    ProxyCommand ssh -q sollipulli nc -q0 10.0.0.77 22
+    User '$accname'
+Host node78
+    ProxyCommand ssh -q sollipulli nc -q0 10.0.0.78 22
+    User '$accname'
+Host node79
+    ProxyCommand ssh -q sollipulli nc -q0 10.0.0.79 22
+    User '$accname'
+Host node80
+    ProxyCommand ssh -q sollipulli nc -q0 10.0.0.80 22
     User '$accname'' >> ~/.ssh/config
 
 
